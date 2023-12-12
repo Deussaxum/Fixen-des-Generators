@@ -35,19 +35,15 @@
 %http://stefano.italians.nl/archives/26
 \titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
 \titlespacing{\section}{1pt}{2pt}{2pt}
- 
 %for publications
 \usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
  
-%Setup hyperref package, and colours for links
-\usepackage[unicode, draft=false]{hyperref}
+
 
 \addbibresource{citations.bib}
 \setlength\bibitemsep{1em}
  
-%for social icons
-\usepackage{fontawesome5}
-% \usepackage{times}
+
  
 % For underline
 \usepackage[normalem]{ulem}
