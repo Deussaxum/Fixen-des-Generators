@@ -19,7 +19,7 @@
 \input{glyphtounicode}
 
 \usepackage[sfdefault]{inter} 
-\usepackage[T1]{fontenc}
+
 
 
 \pagestyle{fancy}
