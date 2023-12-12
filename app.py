@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 from string import Template
+import tempfile
+
 
 # Streamlit-Benutzeroberfläche
 st.title("CV-Generator")
@@ -88,55 +90,18 @@ if st.button("CV Erstellen"):
         # Erstellen des Template-Objekts und Formatierung des LaTeX-Templates
         latex_template = Template(latex_template_string)
         latex_filled = latex_template.safe_substitute(
-            name=name,
-            address=address,
-            phone=phone,
-            email=email,
-            university1=university1,
-            locationus1=locationus1,
-            majorus1=majorus1,
-            timeus1=timeus1,
-            courses1=courses1,
-            gpa1=gpa1,
-            clubs1=clubs1,
-            university2=university2,
-            locationus2=locationus2,
-            majorus2=majorus2,
-            timeus2=timeus2,
-            courses2=courses2,
-            gpa2=gpa2,
-            clubs2=clubs2,
-            experience1=experience1,
-            locatione1=locatione1,
-            position1=position1,
-            timee1=timee1,
-            task11=task11,
-            task12=task12,
-            task13=task13,
-            experience2=experience2,
-            locatione2=locatione2,
-            position2=position2,
-            timee2=timee2,
-            task21=task21,
-            task22=task22,
-            task23=task23,
-            experience3=experience3,
-            locatione3=locatione3,
-            position3=position3,
-            timee3=timee3,
-            task31=task31,
-            task32=task32,
-            task33=task33,
-            extracurricular1=extracurricular1,
-            additionaleducation1=additionaleducation1,
-            certificates1=certificates1,
-            languages1=languages1,
-            computer1=computer1,
-            interests1=interests1
+            # ... [Ihre Platzhalter und Werte wie zuvor] ...
         )
 
-        # Anzeigen des gefüllten LaTeX-Dokuments
-        st.text_area("Vorschau des LaTeX-Dokuments", latex_filled, height=300)
+        # Erstellen einer temporären Datei und Schreiben des LaTeX-Codes
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".tex", mode='w+') as tmpfile:
+            tmpfile.write(latex_filled)
+            tmpfile.seek(0)
+            st.text_area("Vorschau des LaTeX-Dokuments", tmpfile.read(), height=300)
+
+        # Optional: Senden des Inhalts an die API
+        # ... [Ihr Code zur Kommunikation mit der API] ...
+
     except KeyError as key_err:
         st.error(f"Fehler bei der Formatierung: Unbekannter Platzhalter {key_err}")
         st.stop()
