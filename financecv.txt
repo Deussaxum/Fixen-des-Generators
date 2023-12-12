@@ -41,7 +41,7 @@
  
 %Setup hyperref package, and colours for links
 \usepackage[unicode, draft=false]{hyperref}
-\color[HTML]{110223}%{1C033C}
+
 \addbibresource{citations.bib}
 \setlength\bibitemsep{1em}
  
@@ -60,19 +60,19 @@
  
  
 \begin{tabularx}{\linewidth}{@{} C @{}}
-\color[HTML]{1C033C} \Huge{\textbf{Julian Gottstein}} \\[6pt]
+ \Huge{\textbf{Julian Gottstein}} \\[6pt]
 \\
-\textcolor[HTML]{1C033C}{Address: Rorschacher Strasse 116, 900 St. Gallen}
+{Address: Rorschacher Strasse 116, 900 St. Gallen}
  
-\textcolor[HTML]{1C033C}{Mobile: +49 (157) 54058312 $|$}
-\textcolor[HTML]{1C033C}{Email: juliangottstein@gmx.com}
+{Mobile: +49 (157) 54058312 $|$}
+{Email: juliangottstein@gmx.com}
 \end{tabularx}
  
 % Education
 \section{EDUCATION}
-\textbf{university1} \hfill \textbf{\color[HTML]{1C033C} location_us1} \\[-3ex]
+\textbf{university1} \hfill \textbf{location_us1} \\[-3ex]
 \begin{itemize}[label={\large\textbullet}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-    \item majorus1 \hfill \color[HTML]{1C033C} timeus1 \\[-3ex]
+    \item majorus1 \hfill timeus1 \\[-3ex]
 \end{itemize}
 \begin{itemize}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
     \item Courses: courses1
@@ -80,9 +80,9 @@
     \item clubs1
 \end{itemize}
  
-\textbf{university2} \hfill \textbf{\color[HTML]{1C033C} location_us2} \\[-3ex]
+\textbf{university2} \hfill \textbf{location_us2} \\[-3ex]
 \begin{itemize}[label={\large\textbullet}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-    \item majorus2 \hfill \color[HTML]{1C033C} timeus2 \\[-3ex]
+    \item majorus2 \hfill \timeus2 \\[-3ex]
 \end{itemize}
 \begin{itemize}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
     \item Courses: courses2
@@ -92,9 +92,9 @@
  
 %Professional Experience
 \section{PROFESSIONAL EXPERIENCE}
-    \textbf{experience1} \hfill \textbf{\color[HTML]{1C033C} location_e1} \\[-3ex]
+    \textbf{experience1} \hfill \textbf{\location_e1} \\[-3ex]
 \begin{itemize}[label={\large\textbullet}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-    \item \textit{position1} \hfill \color[HTML]{1C033C} timee1 \\[-3ex]
+    \item \textit{position1} \hfill timee1 \\[-3ex]
  
 \end{itemize}
 \begin{itemize}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
@@ -103,9 +103,9 @@
     \item task13
 \end{itemize}
  
-    \textbf{experience2} \hfill \textbf{\color[HTML]{1C033C} location_e2} \\[-3ex]
+    \textbf{experience2} \hfill \textbf{location_e2} \\[-3ex]
 \begin{itemize}[label={\large\textbullet}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-    \item \textit{position2} \hfill \color[HTML]{1C033C} timee2 \\[-3ex]
+    \item \textit{position2} \hfill timee2 \\[-3ex]
  
 \end{itemize}
 \begin{itemize}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
@@ -114,9 +114,9 @@
     \item task23
 \end{itemize}
  
-    \textbf{experience3} \hfill \textbf{\color[HTML]{1C033C} location_e3} \\[-3ex]
+    \textbf{experience3} \hfill \textbf{location_e3} \\[-3ex]
 \begin{itemize}[label={\large\textbullet}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-    \item \textit{position3} \hfill \color[HTML]{1C033C} timee3 \\[-3ex]
+    \item \textit{position3} \hfill timee3 \\[-3ex]
  
 \end{itemize}
 \begin{itemize}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
