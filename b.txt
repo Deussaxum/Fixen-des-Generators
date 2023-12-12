@@ -18,7 +18,6 @@
 \usepackage{multicol}
 \input{glyphtounicode}
 
-\usepackage[sfdefault]{inter} 
 
 
 
