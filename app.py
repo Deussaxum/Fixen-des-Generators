@@ -1,110 +1,187 @@
 import streamlit as st
 import requests
-from string import Template
-import tempfile
 
+def build_pdf(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1, languages1, computer1, interests1):
+    latex_code = fr"""
+    \documentclass[a4paper,8pt]{{article}}
+    \usepackage{{parskip}}
+    \usepackage{{hologo}}
+    \usepackage{{fontspec}}
+    \RequirePackage{{color}}
+    \RequirePackage{{graphicx}}
+    \usepackage[usenames,dvipsnames]{{xcolor}}
+    \usepackage[scale=0.9, top=.4in, bottom=.4in]{{geometry}}
+    \usepackage{{enumitem}}
+    \usepackage{{tabularx}}
+    \usepackage{{enumitem}}
+    \newcolumntype{{C}}{{>{{\centering\arraybackslash}}X}} 
+    \usepackage{{supertabular}}
+    \usepackage{{tabularx}}
+    \newlength{{\fullcollw}}
+    \setlength{{\fullcollw}}{{0.42\textwidth}}
+    \usepackage{{titlesec}}             
+    \usepackage{{multicol}}
+    \usepackage{{multirow}}
+    \titleformat{{\section}}{{\Large\scshape\raggedright}}{{}}{{0em}}{{}}[\titlerule]
+    \titlespacing{{\section}}{{0pt}}{{2pt}}{{2pt}}
+    \usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{{biblatex}}
+    \usepackage[unicode, draft=false]{{hyperref}}
+    \color[HTML]{{110223}}
+    \addbibresource{{citations.bib}}
+    \setlength\bibitemsep{{1em}}
+    \usepackage{{fontawesome5}}
+    \usepackage[normalem]{{ulem}}
+    \setmainfont{{Arial}}
+    \begin{{document}}
+    \pagestyle{{empty}}
+    \begin{{tabularx}}{{\linewidth}}{{@{{}} C @{{}}}}
+    \color[HTML]{{1C033C}} \Huge\textbf{{{name}}} \\[6pt]
+    \textcolor[HTML]{{1C033C}} Address: {address} \\
+    \textcolor[HTML]{{1C033C}} Mobile: {phone} \\
+    \textcolor[HTML]{{1C033C}} Email: {email}
+    \end{{tabularx}}
+    \section{{EDUCATION}}
+    \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item {majorus1} \hfill \color[HTML]{{1C033C}} {timeus1}
+        \item Courses: {courses1}
+        \item GPA: {gpa1}
+        \item {clubs1}
+    \end{{itemize}}
+    \textbf{{{university2}}} \hfill \textbf{{{locationus2}}} \\
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item {majorus2} \hfill \color[HTML]{{1C033C}} {timeus2}
+        \item Courses: {courses2}
+        \item GPA: {gpa2}
+        \item {clubs2}
+    \end{{itemize}}
+    \section{{PROFESSIONAL EXPERIENCE}}
+    \textbf{{{experience1}}} \hfill \textbf{{{locatione1}}} \\
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item \textit{{{position1}}} \hfill \color[HTML]{{1C033C}} {timee1}
+        \item {task11}
+        \item {task12}
+        \item {task13}
+    \end{{itemize}}
+    \textbf{{{experience2}}} \hfill \textbf{{{locatione2}}} \\
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item \textit{{{position2}}} \hfill \color[HTML]{{1C033C}} {timee2}
+        \item {task21}
+        \item {task22}
+        \item {task23}
+    \end{{itemize}}
+    \textbf{{{experience3}}} \hfill \textbf{{{locatione3}}} \\
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item \textit{{{position3}}} \hfill \color[HTML]{{1C033C}} {timee3}
+        \item {task31}
+        \item {task32}
+        \item {task33}
+    \end{{itemize}}
+    \section{{EXTRACURRICULAR ACTIVITIES / ENGAGEMENT}}
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item Extracurricular: {extracurricular1}
+        \item Additional Education: {additionaleducation1}
+        \item Certificate & Achievements: {certificates1}
+    \end{{itemize}}
+    \section{{SKILLS /& INTEREST}}
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item Languages: {languages1}
+        \item Computer: {computer1}
+        \item Interests: {interests1}
+    \end{{itemize}}
+    \end{{document}}
+    """
 
-# Streamlit-Benutzeroberfläche
-st.title("CV-Generator")
+    # Convert the LaTeX code to a format suitable for the API
+    payload = {
+        'latex': latex_code
+    }
 
-# Persönliche Informationen
-st.header("Personal Information")
-name = st.text_input("Name")
-address = st.text_input("Adresse")
-phone = st.text_input("Telefonnummer")
-email = st.text_input("E-Mail")
+    # Specify the API endpoint
+    api_url = 'https://your-latex-api.com/compile'  # Replace with the actual API URL
 
-# Education
-st.header("Education")
-university1 = st.text_input("Universität/Schule 1")
-locationus1 = st.text_input("Standort 1")
-majorus1 = st.text_input("Studiengang 1")
-timeus1 = st.text_input("Zeitraum 1")
-courses1 = st.text_input("Kurse 1")
-gpa1 = st.text_input("GPA 1")
-clubs1 = st.text_input("Clubs/Aktivitäten 1")
-
-university2 = st.text_input("Universität/Schule 2", "")
-locationus2 = st.text_input("Standort 2", "")
-majorus2 = st.text_input("Studiengang 2", "")
-timeus2 = st.text_input("Zeitraum 2", "")
-courses2 = st.text_input("Kurse 2", "")
-gpa2 = st.text_input("GPA 2", "")
-clubs2 = st.text_input("Clubs/Aktivitäten 2", "")
-
-# Professional Experience
-st.header("Professional Experience")
-experience1 = st.text_input("Erfahrung 1")
-locatione1 = st.text_input("Standort Erfahrung 1")
-position1 = st.text_input("Position 1")
-timee1 = st.text_input("Zeitraum Erfahrung 1")
-task11 = st.text_area("Aufgaben 1", key='task11', height=100)
-task12 = st.text_area("Aufgaben 2", key='task12', height=100)
-task13 = st.text_area("Aufgaben 3", key='task13', height=100)
-
-experience2 = st.text_input("Erfahrung 2", "")
-locatione2 = st.text_input("Standort Erfahrung 2", "")
-position2 = st.text_input("Position 2", "")
-timee2 = st.text_input("Zeitraum Erfahrung 2", "")
-task21 = st.text_area("Aufgaben 1", key='task21', height=100)
-task22 = st.text_area("Aufgaben 2", key='task22', height=100)
-task23 = st.text_area("Aufgaben 3", key='task23', height=100)
-
-experience3 = st.text_input("Erfahrung 3", "")
-locatione3 = st.text_input("Standort Erfahrung 3", "")
-position3 = st.text_input("Position 3", "")
-timee3 = st.text_input("Zeitraum Erfahrung 3", "")
-task31 = st.text_area("Aufgaben 1", key='task31', height=100)
-task32 = st.text_area("Aufgaben 2", key='task32', height=100)
-task33 = st.text_area("Aufgaben 3", key='task33', height=100)
-
-# Extracurricular Activities / Engagement
-st.header("Extracurricular Activities / Engagement")
-extracurricular1 = st.text_input("Extrakurrikulare Aktivitäten")
-additionaleducation1 = st.text_input("Zusätzliche Bildung")
-certificates1 = st.text_input("Zertifikate und Errungenschaften")
-
-# Skills & Interest
-st.header("Skills & Interest")
-languages1 = st.text_input("Sprachen")
-computer1 = st.text_input("Computerkenntnisse")
-interests1 = st.text_input("Interessen")
-
-# Button zum Erstellen des CVs
-if st.button("CV Erstellen"):
-    # URL der LaTeX-Vorlage im GitHub-Repository
-    url = "https://raw.githubusercontent.com/Deussaxum/Fixen-des-Generators/main/template_finance.tex"
-    
     try:
-        response = requests.get(url)
+        # Send a request to the LaTeX API
+        response = requests.post(api_url, json=payload)
+
+        # Check if the request was successful
         if response.status_code == 200:
-            latex_template_string = response.text
+            # Get the PDF data from the response
+            pdf_data = response.content
+            return pdf_data
         else:
-            st.error("Vorlage konnte nicht geladen werden.")
-            st.stop()
-    except Exception as e:
-        st.error(f"Fehler beim Laden der Vorlage: {e}")
-        st.stop()
+            # Handle errors (e.g., display a message or log the error)
+            st.error(f"Error compiling PDF: {response.text}")
+            return None
+    except requests.RequestException as e:
+        # Handle request exceptions
+        st.error(f"Request failed: {e}")
+        return None
 
-    try:
-        # Erstellen des Template-Objekts und Formatierung des LaTeX-Templates
-        latex_template = Template(latex_template_string)
-        latex_filled = latex_template.safe_substitute(
-            # ... [Ihre Platzhalter und Werte wie zuvor] ...
-        )
+st.title("CV Creator")
+st.write("Enter your information:")
 
-        # Erstellen einer temporären Datei und Schreiben des LaTeX-Codes
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".tex", mode='w+') as tmpfile:
-            tmpfile.write(latex_filled)
-            tmpfile.seek(0)
-            st.text_area("Vorschau des LaTeX-Dokuments", tmpfile.read(), height=300)
+name = st.text_input("Name", "Your Name")
+address = st.text_input("Address", "Your Address")
+phone = st.text_input("Phone", "Your Phone")
+email = st.text_input("Email", "your.email@example.com")
 
-        # Optional: Senden des Inhalts an die API
-        # ... [Ihr Code zur Kommunikation mit der API] ...
+# Education Inputs
+university1 = st.text_input("University 1", "University Name")
+locationus1 = st.text_input("Location of University 1", "Location")
+majorus1 = st.text_input("Major at University 1", "Major")
+timeus1 = st.text_input("Time at University 1", "Time Period")
+courses1 = st.text_input("Courses at University 1", "Courses")
+gpa1 = st.text_input("GPA at University 1", "GPA")
+clubs1 = st.text_input("Clubs at University 1", "Clubs")
 
-    except KeyError as key_err:
-        st.error(f"Fehler bei der Formatierung: Unbekannter Platzhalter {key_err}")
-        st.stop()
-    except Exception as format_err:
-        st.error(f"Fehler bei der Formatierung: {format_err}")
-        st.stop()
+university2 = st.text_input("University 2", "Second University Name")
+locationus2 = st.text_input("Location of University 2", "Location")
+majorus2 = st.text_input("Major at University 2", "Major")
+timeus2 = st.text_input("Time at University 2", "Time Period")
+courses2 = st.text_input("Courses at University 2", "Courses")
+gpa2 = st.text_input("GPA at University 2", "GPA")
+clubs2 = st.text_input("Clubs at University 2", "Clubs")
+
+# Professional Experience Inputs
+experience1 = st.text_input("First Experience", "Company/Organization")
+locatione1 = st.text_input("Location of First Experience", "Location")
+position1 = st.text_input("Position at First Experience", "Position")
+timee1 = st.text_input("Time Period at First Experience", "Time Period")
+task11 = st.text_input("Task 1 at First Experience", "Task")
+task12 = st.text_input("Task 2 at First Experience", "Task")
+task13 = st.text_input("Task 3 at First Experience", "Task")
+
+experience2 = st.text_input("Second Experience", "Second Company/Organization")
+locatione2 = st.text_input("Location of Second Experience", "Location")
+position2 = st.text_input("Position at Second Experience", "Position")
+timee2 = st.text_input("Time Period at Second Experience", "Time Period")
+task21 = st.text_input("Task 1 at Second Experience", "Task")
+task22 = st.text_input("Task 2 at Second Experience", "Task")
+task23 = st.text_input("Task 3 at Second Experience", "Task")
+
+experience3 = st.text_input("Third Experience", "Third Company/Organization")
+locatione3 = st.text_input("Location of Third Experience", "Location")
+position3 = st.text_input("Position at Third Experience", "Position")
+timee3 = st.text_input("Time Period at Third Experience", "Time Period")
+task31 = st.text_input("Task 1 at Third Experience", "Task")
+task32 = st.text_input("Task 2 at Third Experience", "Task")
+task33 = st.text_input("Task 3 at Third Experience", "Task")
+
+# Extracurricular Activities
+extracurricular1 = st.text_input("Extracurricular Activities", "Activities")
+
+# Additional Education and Certificates
+additionaleducation1 = st.text_input("Additional Education", "Courses or Training")
+certificates1 = st.text_input("Certificates and Achievements", "Certificates")
+
+# Skills and Interests
+languages1 = st.text_input("Languages", "Languages Spoken")
+computer1 = st.text_input("Computer Skills", "Skills")
+interests1 = st.text_input("Interests", "Hobbies and Interests")
+
+# Compile PDF Button
+if st.button("Compile PDF"):
+    pdf_data = build_pdf(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1, languages1, computer1, interests1)
+    if pdf_data is not None:
+        st.download_button("Download PDF", pdf_data, file_name='CV.pdf', mime='application/pdf')
