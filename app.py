@@ -162,6 +162,7 @@ def build_pdf(name, address, email, university_name1, university_degree1, univer
         st.success("CV generated successfully!")
         pdf_content = response.content
         st.write(pdf_content)
+# ... (previous code)
 
 if __name__ == "__main__":
     st.title("Curriculum Vitae Generator")
