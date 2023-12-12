@@ -98,7 +98,7 @@ def build_pdf(name, address, phone, email, university1, locationus1, majorus1, t
     }
 
     # Specify the API endpoint
-    api_url = 'https://your-latex-api.com/compile'  # Replace with the actual API URL
+    api_url = 'https://latexonline.cc/compile'
 
     try:
         # Send a request to the LaTeX API
