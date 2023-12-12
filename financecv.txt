@@ -53,8 +53,6 @@
 % For underline
 \usepackage[normalem]{ulem}
  
-\setmainfont{Arial}  % Set it to whatever you like
- 
  
 \begin{document}
  
