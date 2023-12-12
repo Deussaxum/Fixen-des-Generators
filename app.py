@@ -102,7 +102,7 @@ def build_pdf(name, address, phone, email, university1, locationus1, majorus1, t
 
     try:
         # Send a request to the LaTeX API
-        response = requests.post(api_url, json=payload)
+        response = requests.post(api_url, params={'text': latex_code})
 
         # Check if the request was successful
         if response.status_code == 200:
