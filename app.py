@@ -76,7 +76,7 @@ if st.button("CV Erstellen"):
     try:
         response = requests.get(url)
         if response.status_code == 200:
-            latex_template_string = response.text
+            latex_template_string = response.text.replace('$', '!')
         else:
             st.error("Vorlage konnte nicht geladen werden.")
             st.stop()
@@ -143,4 +143,3 @@ if st.button("CV Erstellen"):
     except Exception as format_err:
         st.error(f"Fehler bei der Formatierung: {format_err}")
         st.stop()
-
