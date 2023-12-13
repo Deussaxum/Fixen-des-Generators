@@ -161,7 +161,7 @@ def main():
         create_tex_file(filled_template)
 
     token = os.environ.get('GITHUB_TOKEN')
-    repo_name = "deussaxum/Fixen-des-Generators"
+    repo_name = "Deussaxum/Fixen-des-Generators"
     if st.button("Hochladen auf GitHub"):
         upload_to_github('output.tex', filled_template, repo_name, token)
 
