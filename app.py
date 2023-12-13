@@ -3,7 +3,7 @@ from github import Github
 import os
 
 # Umgebungsvariable für GitHub Token setzen
-os.environ['GITHUB_TOKEN'] = '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'
+os.environ['GITHUB_TOKEN'] = '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'
 
 def load_template():
     with open('template.tex', 'r') as file:
