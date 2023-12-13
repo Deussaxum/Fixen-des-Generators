@@ -2,8 +2,8 @@ import streamlit as st
 from github import Github
 import os
 
-# Umgebungsvariable für GitHub Token setzen
-os.environ['GITHUB_TOKEN'] = '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'
+# Set your environment variable for the GitHub Token
+os.environ['GITHUB_TOKEN'] = 'your_github_token_here'
 
 def load_template():
     with open('template.tex', 'r') as file:
@@ -36,13 +36,13 @@ def upload_to_github(filename, content, repo_name, token):
         if git_file in all_files:
             contents = repo.get_contents(git_file)
             repo.update_file(contents.path, "Updating file", content, contents.sha, branch="master")
-            st.success(f"Datei {filename} erfolgreich aktualisiert!")
+            st.success(f"File {filename} successfully updated!")
         else:
             repo.create_file(git_file, "Creating new file", content, branch="master")
-            st.success(f"Datei {filename} erfolgreich erstellt!")
+            st.success(f"File {filename} successfully created!")
         return True
     except Exception as e:
-        st.error(f"Fehler beim Zugriff auf das Repository oder Hochladen: {e}")
+        st.error(f"Error accessing the repository or uploading: {e}")
         return False
 
 def main():
