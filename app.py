@@ -20,8 +20,8 @@ def create_tex_file(content, filename='output.tex'):
         file.write(content)
 
 def upload_to_github(filename, content, repo_name, token):
-    g = Github(token)
     try:
+        g = Github(token)
         repo = g.get_user().get_repo(repo_name)
         repo.create_file(filename, "CV update", content)
         st.success(f"Datei {filename} erfolgreich auf GitHub hochgeladen!")
@@ -149,11 +149,8 @@ def main():
         token = os.environ.get('GITHUB_TOKEN')  # Liest das Token aus der Umgebungsvariable
         repo_name = "deussaxum/Fixen-des-Generators"  # Ihr GitHub Benutzername und Repository-Name
         if st.button("Hochladen auf GitHub"):
-            success = upload_to_github('output.tex', filled_template, repo_name, token)
-            if success:
-                st.success("Erfolgreich auf GitHub hochgeladen!")
-            else:
-                st.error("Fehler beim Hochladen auf GitHub.")
+            st.write("Versuche, auf GitHub hochzuladen...")
+            upload_to_github('output.tex', filled_template, repo_name, token)
 
 if __name__ == "__main__":
     main()
