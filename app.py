@@ -21,12 +21,13 @@ def create_tex_file(content, filename='output.tex'):
 
 def upload_to_github(filename, content, repo_name, token):
     g = Github(token)
-    repo = g.get_user().get_repo(repo_name)
     try:
+        repo = g.get_user().get_repo(repo_name)
         repo.create_file(filename, "CV update", content)
+        st.success(f"Datei {filename} erfolgreich auf GitHub hochgeladen!")
         return True
     except Exception as e:
-        print(f"Fehler beim Hochladen: {e}")
+        st.error(f"Fehler beim Zugriff auf das Repository oder Hochladen: {e}")
         return False
 
 # Streamlit Benutzeroberfläche
