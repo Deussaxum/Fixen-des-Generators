@@ -146,11 +146,11 @@ def main():
         create_tex_file(filled_template)
 
         # Hochladen auf GitHub
-        token = os.environ.get('GITHUB_TOKEN')  # Liest das Token aus der Umgebungsvariable
-        repo_name = "deussaxum/Fixen-des-Generators"  # Ihr GitHub Benutzername und Repository-Name
-        if st.button("Hochladen auf GitHub"):
-            st.write("Versuche, auf GitHub hochzuladen...")
-            upload_to_github('output.tex', filled_template, repo_name, token)
+        token = os.environ.get('GITHUB_TOKEN')
+    repo_name = "deussaxum/Fixen-des-Generators"
+    if st.button("Hochladen auf GitHub"):
+        st.write("Versuche, auf GitHub hochzuladen...")
+        upload_to_github('output.tex', filled_template, repo_name, token)
 
 if __name__ == "__main__":
     main()
