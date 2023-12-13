@@ -22,8 +22,24 @@ def upload_to_github(filename, content, repo_name, token):
     try:
         g = Github(token)
         repo = g.get_user().get_repo(repo_name)
-        repo.create_file(filename, "CV update", content)
-        st.success(f"Datei {filename} erfolgreich auf GitHub hochgeladen!")
+        all_files = []
+        contents = repo.get_contents("")
+        while contents:
+            file_content = contents.pop(0)
+            if file_content.type == "dir":
+                contents.extend(repo.get_contents(file_content.path))
+            else:
+                file = file_content
+                all_files.append(str(file).replace('ContentFile(path="','').replace('")',''))
+
+        git_file = filename
+        if git_file in all_files:
+            contents = repo.get_contents(git_file)
+            repo.update_file(contents.path, "Updating file", content, contents.sha, branch="master")
+            st.success(f"Datei {filename} erfolgreich aktualisiert!")
+        else:
+            repo.create_file(git_file, "Creating new file", content, branch="master")
+            st.success(f"Datei {filename} erfolgreich erstellt!")
         return True
     except Exception as e:
         st.error(f"Fehler beim Zugriff auf das Repository oder Hochladen: {e}")
@@ -141,7 +157,6 @@ def main():
     }
     filled_template = fill_template(template, user_data)
 
-    # Buttons für die Aktionen
     if st.button("Lebenslauf erstellen"):
         create_tex_file(filled_template)
 
