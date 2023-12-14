@@ -48,7 +48,7 @@ def build_latex_code(name, address, phone, email, qualification1, qualification2
         \item {qualification3}
     \end{{itemize}}
     \section{{EDUCATION}}
-    \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\
+    \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item {majorus1} \hfill \color[HTML]{{1C033C}} {timeus1}
     \end{{itemize}}
@@ -57,7 +57,7 @@ def build_latex_code(name, address, phone, email, qualification1, qualification2
         \item GPA: {gpa1}
         \item {clubs1}
     \end{{itemize}}
-    \textbf{{{university2}}} \hfill \textbf{{{locationus2}}} \\
+    \textbf{{{university2}}} \hfill \textbf{{{locationus2}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item {majorus2} \hfill \color[HTML]{{1C033C}} {timeus2}
     \end{{itemize}}
@@ -67,7 +67,7 @@ def build_latex_code(name, address, phone, email, qualification1, qualification2
         \item {clubs2}
     \end{{itemize}}
     \section{{PROFESSIONAL EXPERIENCE}}
-    \textbf{{{experience1}}} \hfill \textbf{{{locatione1}}} \\
+    \textbf{{{experience1}}} \hfill \textbf{{{locatione1}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item \textit{{{position1}}} \hfill \color[HTML]{{1C033C}} {timee1}
     \end{{itemize}}
@@ -76,7 +76,7 @@ def build_latex_code(name, address, phone, email, qualification1, qualification2
         \item {task12}
         \item {task13}
     \end{{itemize}}
-    \textbf{{{experience2}}} \hfill \textbf{{{locatione2}}} \\
+    \textbf{{{experience2}}} \hfill \textbf{{{locatione2}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item \textit{{{position2}}} \hfill \color[HTML]{{1C033C}} {timee2}
     \end{{itemize}}
@@ -85,7 +85,7 @@ def build_latex_code(name, address, phone, email, qualification1, qualification2
         \item {task22}
         \item {task23}
     \end{{itemize}}
-    \textbf{{{experience3}}} \hfill \textbf{{{locatione3}}} \\
+    \textbf{{{experience3}}} \hfill \textbf{{{locatione3}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item \textit{{{position3}}} \hfill \color[HTML]{{1C033C}} {timee3}
     \end{{itemize}}

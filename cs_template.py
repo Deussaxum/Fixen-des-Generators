@@ -42,7 +42,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
     \textcolor[HTML]{{1C033C}} Email: {email}
     \end{{tabularx}}
     \section{{EDUCATION}}
-    \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\
+    \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item {majorus1} \hfill \color[HTML]{{1C033C}} {timeus1}
     \end{{itemize}}
@@ -51,7 +51,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item GPA: {gpa1}
         \item {clubs1}
     \end{{itemize}}
-    \textbf{{{university2}}} \hfill \textbf{{{locationus2}}} \\
+    \textbf{{{university2}}} \hfill \textbf{{{locationus2}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item {majorus2} \hfill \color[HTML]{{1C033C}} {timeus2}
     \end{{itemize}}
@@ -61,7 +61,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item {clubs2}
     \end{{itemize}}
     \section{{PROFESSIONAL EXPERIENCE}}
-    \textbf{{{experience1}}} \hfill \textbf{{{locatione1}}} \\
+    \textbf{{{experience1}}} \hfill \textbf{{{locatione1}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item \textit{{{position1}}} \hfill \color[HTML]{{1C033C}} {timee1}
     \end{{itemize}}
@@ -69,7 +69,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item {task11}
         \item {task12}
     \end{{itemize}}
-    \textbf{{{experience2}}} \hfill \textbf{{{locatione2}}} \\
+    \textbf{{{experience2}}} \hfill \textbf{{{locatione2}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item \textit{{{position2}}} \hfill \color[HTML]{{1C033C}} {timee2}
     \end{{itemize}}
@@ -78,7 +78,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item {task22}
     \end{{itemize}}
     \section{{PROJECTS}}
-    \textbf{{{projectname1}}} \hfill \textbf{{{planguage1}}} \\
+    \textbf{{{projectname1}}} \hfill \textbf{{{planguage1}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
     \item \textit{{{pfunction1}}} \hfill \color[HTML]{{1C033C}} {timep1}
     \end{{itemize}}
@@ -86,7 +86,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item {taskp11}
         \item {taskp12}
     \end{{itemize}}
-    \textbf{{{projectname2}}} \hfill \textbf{{{planguage2}}} \\
+    \textbf{{{projectname2}}} \hfill \textbf{{{planguage2}}} \\[-3ex]
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
     \item \textit{{{pfunction2}}} \hfill \color[HTML]{{1C033C}} {timep2}
     \end{{itemize}}
