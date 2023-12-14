@@ -22,7 +22,7 @@ def retrieve_info(linkedin_profile_url):
 # Funktion zum Erstellen des LaTeX-Codes
 def build_latex_code(**kwargs):
     # LaTeX-Code-Vorlage hier einfügen
-    latex_code = f"""
+     latex_code = r"""
     % Hier kommt Ihr LaTeX-Code
     \documentclass[a4paper,8pt]{{article}}
     \usepackage{{parskip}}
