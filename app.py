@@ -1,8 +1,7 @@
-
 import streamlit as st
 import subprocess
 
-def build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1, languages1, computer1, interests1):
+def build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1, planguage1, pfunction1, timep1, taskp11, taskp12, planguage2, pfunction2, timep2, taskp21, taskp22, technologies1):
     latex_code = fr"""
     % Hier kommt Ihr LaTeX-Code
     \documentclass[a4paper,8pt]{{article}}
@@ -69,7 +68,6 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
     \begin{{itemize}}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
         \item {task11}
         \item {task12}
-        \item {task13}
     \end{{itemize}}
     \textbf{{{experience2}}} \hfill \textbf{{{locatione2}}} \\
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
@@ -78,16 +76,23 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
     \begin{{itemize}}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
         \item {task21}
         \item {task22}
-        \item {task23}
     \end{{itemize}}
-    \textbf{{{experience3}}} \hfill \textbf{{{locatione3}}} \\
+    \section{{PROJECTS}}
+    \textbf{{{projectname1}}} \hfill \textbf{{{planguage1}}} \\
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-        \item \textit{{{position3}}} \hfill \color[HTML]{{1C033C}} {timee3}
+    \item \textit{{{pfunction1}}} \hfill \color[HTML]{{1C033C}} {timep1}
     \end{{itemize}}
     \begin{{itemize}}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
-        \item {task31}
-        \item {task32}
-        \item {task33}
+        \item {taskp11}
+        \item {taskp12}
+    \end{{itemize}}
+    \textbf{{{projectname2}}} \hfill \textbf{{{planguage2}}} \\
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+    \item \textit{{{pfunction2}}} \hfill \color[HTML]{{1C033C}} {timep2}
+    \end{{itemize}}
+    \begin{{itemize}}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
+        \item {taskp21}
+        \item {taskp22}
     \end{{itemize}}
     \section{{EXTRACURRICULAR ACTIVITIES / ENGAGEMENT}}
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
@@ -95,11 +100,10 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item Additional Education: {additionaleducation1}
         \item Certificate & Achievements: {certificates1}
     \end{{itemize}}
-    \section{{SKILLS /& INTEREST}}
+    \section{{SKILLS}}
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item Languages: {languages1}
-        \item Computer: {computer1}
-        \item Interests: {interests1}
+        \item Technologies / Tools:: {technologies1}
     \end{{itemize}}
     \end{{document}}
     """
@@ -137,7 +141,6 @@ position1 = st.text_input("Position at First Experience", "Position")
 timee1 = st.text_input("Time Period at First Experience", "Time Period")
 task11 = st.text_input("Task 1 at First Experience", "Task")
 task12 = st.text_input("Task 2 at First Experience", "Task")
-task13 = st.text_input("Task 3 at First Experience", "Task")
 
 experience2 = st.text_input("Second Experience", "Second Company/Organization")
 locatione2 = st.text_input("Location of Second Experience", "Location")
@@ -145,16 +148,21 @@ position2 = st.text_input("Position at Second Experience", "Position")
 timee2 = st.text_input("Time Period at Second Experience", "Time Period")
 task21 = st.text_input("Task 1 at Second Experience", "Task")
 task22 = st.text_input("Task 2 at Second Experience", "Task")
-task23 = st.text_input("Task 3 at Second Experience", "Task")
 
-experience3 = st.text_input("Third Experience", "Third Company/Organization")
-locatione3 = st.text_input("Location of Third Experience", "Location")
-position3 = st.text_input("Position at Third Experience", "Position")
-timee3 = st.text_input("Time Period at Third Experience", "Time Period")
-task31 = st.text_input("Task 1 at Third Experience", "Task")
-task32 = st.text_input("Task 2 at Third Experience", "Task")
-task33 = st.text_input("Task 3 at Third Experience", "Task")
+#Programming Projects
+projectname1 = st.text_input("Programming Project 1", "Search AI")
+planguage1 = st.text_input("Programming tools used in the project", "Python, Java Script, SQL Server, HTML")
+pfunction1 = st.text_input("Projects function", "Web Scraper for daily search")
+timep1 = st.text_input("Time of the Project", "05/2022 - 08/2022")
+taskp11 = st.text_input(" Task done during integration 1", "Finetuned a ChatGPT API")
+taskp12 = st.text_input("Task done during integration 2", "Designed a Website with HTML")
 
+projectname2 = st.text_input("Programming Project 2", "Picturest")
+planguage2 = st.text_input("Programming tools used in the project", "C++, Java Script, Git")
+pfunction2 = st.text_input("Projects function", "Picture upscaler")
+timep2 = st.text_input("Time of the Project", "09/2021 - 12/2021")
+taskp21 = st.text_input(" Task done during integration 1", "Selecting and implementing a suitable upscaling method, such as bicubic interpolation")
+taskp22 = st.text_input("Task done during integration 2", "Used JavaScript to create interactive components in the user interface")
 # Extracurricular Activities
 extracurricular1 = st.text_input("Extracurricular Activities", "Activities")
 
@@ -163,13 +171,13 @@ additionaleducation1 = st.text_input("Additional Education", "Courses or Trainin
 certificates1 = st.text_input("Certificates and Achievements", "Certificates")
 
 # Skills and Interests
-languages1 = st.text_input("Languages", "Languages Spoken")
-computer1 = st.text_input("Computer Skills", "Skills")
-interests1 = st.text_input("Interests", "Hobbies and Interests")
+languages1 = st.text_input("Programming Languages", "Python, PHP, C++, SQL, HTML, JavaScript")
+technologies1 = st.text_input("Technologies / Tools", "Flask, Django, Git, Linux, Docker")
+
 
 # Compile LaTeX Button
 if st.button("Generate LaTeX"):
-    latex_code = build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1, languages1, computer1, interests1)
+    latex_code = build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1, planguage1, pfunction1, timep1, taskp11, taskp12, planguage2, pfunction2, timep2, taskp21, taskp22, technologies1)
     st.text_area("Generated LaTeX Code:", latex_code, height=300)
     
     st.markdown("### How to Create a Pdf with this LaTeX Code")
