@@ -1,4 +1,4 @@
-import streamlit as st
+mport streamlit as st
 import subprocess
 
 def build_latex_code(name, address, phone, email, qualification1, qualification2, qualification3, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1):
@@ -98,12 +98,6 @@ def build_latex_code(name, address, phone, email, qualification1, qualification2
         \item {task32}
         \item {task33}
     \end{{itemize}}
-    \section{{EXTRACURRICULAR ACTIVITIES / ENGAGEMENT}}
-    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-        \item Extracurricular: {extracurricular1}
-        \item Additional Education: {additionaleducation1}
-        \item Certificate & Achievements: {certificates1}
-    \end{{itemize}}
 
     \end{{document}}
     """
@@ -167,7 +161,7 @@ additionaleducation1 = st.text_input("Additional Education", "Courses or Trainin
 certificates1 = st.text_input("Certificates and Achievements", "Certificates")
 
 # Core Qualification and Interest
-qualification1 = st.text_input(„Core Qualification in Law 1, „Mergers an acquisitions“)
+qualification1 = st.text_input("Core Qualification in Law 1“, „Mergers an acquisitions“)
 qualification2 = st.text_input("Core Qualification in Law 2“, „Corporate Law“)
 qualification3 = st.text_input("Core Qualification in Law 3“, „Securities regulation“)
 
@@ -184,4 +178,3 @@ if st.button("Generate LaTeX"):
     - Paste the copied code on the left side of the Overleaf editor.
     - Compile the document to generate a PDF.
     - Download the PDF from Overleaf once it's compiled.
-    """)
