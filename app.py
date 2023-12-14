@@ -135,23 +135,23 @@ courses2 = st.text_input("Courses at University 2", "Courses")
 gpa2 = st.text_input("GPA at University 2", "GPA")
 clubs2 = st.text_input("Clubs at University 2", "Clubs")
 
-# Professional Experience Inputs
-experience1 = st.text_input("First Experience", "Company/Organization")
-locatione1 = st.text_input("Location of First Experience", "Location")
-position1 = st.text_input("Position at First Experience", "Position")
-timee1 = st.text_input("Time Period at First Experience", "Time Period")
-task11 = st.text_input("Task 1 at First Experience", "Task")
-task12 = st.text_input("Task 2 at First Experience", "Task")
+# Teaching / Professional Experience Inputs
+experience1 = st.text_input("First Teaching/ Academic Experience", "History of Switzerlands Exports")
+locatione1 = st.text_input("Location of First Experience", "Zurich, Switzerland")
+position1 = st.text_input("Position at First Experience", "Lecturer")
+timee1 = st.text_input("Time Period at First Experience", "05/2022-08/2022")
+task11 = st.text_input("Task 1 at First Experience", "Teached 50 students about the history of Switzerlands exports")
+task12 = st.text_input("Task 2 at First Experience", "Supported the creation and publication of two papers about Switzerlands exports")
 
-experience2 = st.text_input("Second Experience", "Second Company/Organization")
-locatione2 = st.text_input("Location of Second Experience", "Location")
-position2 = st.text_input("Position at Second Experience", "Position")
-timee2 = st.text_input("Time Period at Second Experience", "Time Period")
-task21 = st.text_input("Task 1 at Second Experience", "Task")
-task22 = st.text_input("Task 2 at Second Experience", "Task")
+experience2 = st.text_input("Second Teaching/ Academic Experience", "Second Company/Organization")
+locatione2 = st.text_input("Location of Second Experience", "St. Gallen, Switzerland")
+position2 = st.text_input("Position at Second Experience", "Teaching Assistant")
+timee2 = st.text_input("Time Period at Second Experience", "06/2021-09/2021")
+task21 = st.text_input("Task 1 at Second Experience", "Prepared teaching material for all six lectures")
+task22 = st.text_input("Task 2 at Second Experience", "Helped in the innovation and improvement of the lecture according to students feedback")
 
-#Startup Projects
-projectname1 = st.text_input("Programming Project 1", "Search AI")
+#Publications
+projectname1 = st.text_input("First Publication ", "The Influence of Social Media on Switzerlands exports")
 elocation1 = st.text_input("Programming tools used in the project", "Python, Java Script, SQL Server, HTML")
 ereason1 = st.text_input("Projects function", "Web Scraper for daily search")
 timeen1 = st.text_input("Time of the Project", "05/2022 - 08/2022")
@@ -164,10 +164,8 @@ ereason2 = st.text_input("Projects function", "Picture upscaler")
 timeen2 = st.text_input("Time of the Project", "09/2021 - 12/2021")
 taske21 = st.text_input(" Task done during integration 1", "Selecting and implementing a suitable upscaling method, such as bicubic interpolation")
 taske22 = st.text_input("Task done during integration 2", "Used JavaScript to create interactive components in the user interface")
-# Extracurricular Activities
+# Extracurricular Activities / Engagement
 extracurricular1 = st.text_input("Extracurricular Activities", "Activities")
-
-# Additional Education and Certificates
 additionaleducation1 = st.text_input("Additional Education", "Courses or Training")
 certificates1 = st.text_input("Certificates and Achievements", "Certificates")
 
