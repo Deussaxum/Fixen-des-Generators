@@ -42,11 +42,7 @@ def build_latex_code(name, address, phone, email, qualification1, qualification2
     \textcolor[HTML]{{1C033C}} Email: {email}
     \end{{tabularx}}
     \section{{CORE QUALIFICATIONS / INTERESTS}}
-    \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\
-    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-        \item {majorus1} \hfill \color[HTML]{{1C033C}} {timeus1}
-    \end{{itemize}}
-    \begin{{itemize}}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
+   \begin{{itemize}}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
         \item {qualification1}
         \item {qualification2}
         \item {qualification3}
