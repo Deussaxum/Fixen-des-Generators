@@ -1,7 +1,7 @@
 import streamlit as st
 import subprocess
 
-def build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1,projectname2, elocation1, ereason1, timeen1, taske11, taske12, elocation2, timeen2, taske21, taske22, computer1, interests1, ereason2):
+def build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1,projectname2, elocation1, ereason1, timeen1, taske11, taske12, elocation2, timeen2, taske21, taske22, speeches1, research1, ereason2):
     latex_code = fr"""
     % Hier kommt Ihr LaTeX-Code
     \documentclass[a4paper,8pt]{{article}}
@@ -60,7 +60,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item GPA: {gpa2}
         \item {clubs2}
     \end{{itemize}}
-    \section{{PROFESSIONAL EXPERIENCE}}
+    \section{{TEACHING / PROFESSIONAL EXPERIENCE}}
     \textbf{{{experience1}}} \hfill \textbf{{{locatione1}}} \\
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item \textit{{{position1}}} \hfill \color[HTML]{{1C033C}} {timee1}
@@ -77,7 +77,7 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
         \item {task21}
         \item {task22}
     \end{{itemize}}
-    \section{{ENTREPRENEUR PROJECTS}}
+    \section{{PUBLICATIONS}}
     \textbf{{{projectname1}}} \hfill \textbf{{{elocation1}}} \\
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
     \item \textit{{{ereason1}}} \hfill \color[HTML]{{1C033C}} {timeen1}
@@ -103,8 +103,8 @@ def build_latex_code(name, address, phone, email, university1, locationus1, majo
     \section{{SKILLS /& INTEREST}}
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
         \item Languages: {languages1}
-        \item Programming: {computer1}
-        \item Startup Interests: {interests1}
+        \item Speeches held: {speeches1}
+        \item Research Fields interested in: {research1}
     \end{{itemize}}
     \end{{document}}
     """
@@ -173,13 +173,13 @@ certificates1 = st.text_input("Certificates and Achievements", "Certificates")
 
 # Skills and Interests
 languages1 = st.text_input(" Languages", "Spanish, French")
-computer1 = st.text_input("Programming capabilities","Python, PHP, C++, SQL, HTML, JavaScript")
-interests1 = st.text_input("Startup Fields interested in", "Blockchain, Artificial Intelligence, Virtal Reality")
+speeches1 = st.text_input("Programming capabilities","Python, PHP, C++, SQL, HTML, JavaScript")
+research1 = st.text_input("Startup Fields interested in", "Blockchain, Artificial Intelligence, Virtal Reality")
 
 
 # Compile LaTeX Button
 if st.button("Generate LaTeX"):
-    latex_code = build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1,projectname2, elocation1, ereason1, timeen1, taske11, taske12, elocation2, timeen2, taske21, taske22, computer1, interests1, ereason2)
+    latex_code = build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1,projectname2, elocation1, ereason1, timeen1, taske11, taske12, elocation2, timeen2, taske21, taske22, speeches1, research1, ereason2)
     st.text_area("Generated LaTeX Code:", latex_code, height=300)
     
     st.markdown("### How to Create a Pdf with this LaTeX Code")
