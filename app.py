@@ -161,9 +161,9 @@ additionaleducation1 = st.text_input("Additional Education", "Courses or Trainin
 certificates1 = st.text_input("Certificates and Achievements", "Certificates")
 
 # Core Qualification and Interest
-qualification1 = st.text_input("Core Qualification in Law 1", „Mergers an acquisitions“)
-qualification2 = st.text_input("Core Qualification in Law 2“, „Corporate Law“)
-qualification3 = st.text_input("Core Qualification in Law 3“, „Securities regulation“)
+qualification1 = st.text_input("Core Qualification in Law 1", "Mergers and acquisitions")
+qualification2 = st.text_input("Core Qualification in Law 2“, "Corporate Law") 
+qualification3 = st.text_input("Core Qualification in Law 3“, "Securities regulation“)
 
 # Compile LaTeX Button
 if st.button("Generate LaTeX"):
