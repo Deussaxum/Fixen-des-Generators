@@ -1,28 +1,8 @@
 import streamlit as st
-import requests
+import subprocess
 
-# Funktion zur Extraktion von Informationen aus der API-Antwort
-def extract_info(jsondata):
-    keys = ['full_name', 'city', 'state', 'country', 'education', 'experiences', 'volunteer_work', 'certifications', 'languages', 'interests']
-    return {key: jsondata.get(key, [] if key != 'full_name' else '') for key in keys}
-
-# Funktion zum Abrufen von Informationen
-def retrieve_info(linkedin_profile_url):
-    api_key = '_EIqMpWEbOnJLoQvNFz1CQ'
-    headers = {'Authorization': 'Bearer ' + api_key}
-    api_endpoint = 'https://nubela.co/proxycurl/api/v2/linkedin'
-    params = {'linkedin_profile_url': linkedin_profile_url}
-    response = requests.get(api_endpoint, params=params, headers=headers)
-    if response.status_code == 200:
-        return extract_info(response.json())
-    else:
-        st.error(f"Profilinformationen konnten nicht abgerufen werden: HTTP {response.status_code}")
-        return None
-
-# Funktion zum Erstellen des LaTeX-Codes
-def build_latex_code(**kwargs):
-    # LaTeX-Code-Vorlage hier einfügen
-     latex_code = r"""
+def build_latex_code(name, address, phone, email, qualification1, qualification2, qualification3, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1):
+    latex_code = fr"""
     % Hier kommt Ihr LaTeX-Code
     \documentclass[a4paper,8pt]{{article}}
     \usepackage{{parskip}}
@@ -61,6 +41,16 @@ def build_latex_code(**kwargs):
     \textcolor[HTML]{{1C033C}} Mobile: {phone} \\
     \textcolor[HTML]{{1C033C}} Email: {email}
     \end{{tabularx}}
+    \section{{CORE QUALIFICATIONS / INTERESTS}}
+    \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\
+    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
+        \item {majorus1} \hfill \color[HTML]{{1C033C}} {timeus1}
+    \end{{itemize}}
+    \begin{{itemize}}[label=$\circ$,itemsep=0.5ex,parsep=0.5ex]
+        \item {qualification1}
+        \item {qualification2}
+        \item {qualification3}
+    \end{{itemize}}
     \section{{EDUCATION}}
     \textbf{{{university1}}} \hfill \textbf{{{locationus1}}} \\
     \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
@@ -114,42 +104,84 @@ def build_latex_code(**kwargs):
         \item Additional Education: {additionaleducation1}
         \item Certificate & Achievements: {certificates1}
     \end{{itemize}}
-    \section{{SKILLS /& INTEREST}}
-    \begin{{itemize}}[label={{\large\textbullet}}, left=0pt, itemsep=0.5ex, parsep=0.5ex]
-        \item Languages: {languages1}
-        \item Computer: {computer1}
-        \item Interests: {interests1}
-    \end{{itemize}}
+
     \end{{document}}
     """
     return latex_code
 
-# Streamlit-App-Layout
-st.title("CV Generator 📃")
+st.write("# CV Creator")
+st.write("Enter your information:")
 
-# Tab-System
-tab_titles = ["Consulting 🧮", "Finance 📈", "Corporate 🏢", "Start-Up 🚀", "IT 🖥", "Academic 📚"]
-tabs = st.tabs(tab_titles)
+name = st.text_input("Name", "Your Name")
+address = st.text_input("Address", "Your Address")
+phone = st.text_input("Phone", "Your Phone")
+email = st.text_input("Email", "your.email@example.com")
 
-for tab in tabs:
-    with tab:
-        # Layout für jede Tab-Seite
-        linkedin_profile_url = st.text_input('LinkedIn-Profil-URL eingeben', key=f'linkedin_url_{tab.index}')
-        linkedin_data = {}
-        if st.button('LinkedIn-Daten abrufen', key=f'retrieve_data_{tab.index}'):
-            linkedin_data = retrieve_info(linkedin_profile_url) or {}
+# Education Inputs
+university1 = st.text_input("University 1", "University Name")
+locationus1 = st.text_input("Location of University 1", "Location")
+majorus1 = st.text_input("Major at University 1", "Major")
+timeus1 = st.text_input("Time at University 1", "Time Period")
+courses1 = st.text_input("Courses at University 1", "Courses")
+gpa1 = st.text_input("GPA at University 1", "GPA")
+clubs1 = st.text_input("Clubs at University 1", "Clubs")
 
-        # Eingabefelder für Benutzerdaten
-        form = st.form(key=f'form_{tab.index}')
-        name = form.text_input("Name", value=linkedin_data.get('full_name', ''))
-        address = form.text_input("Adresse")
-        phone = form.text_input("Telefonnummer")
-        email = form.text_input("E-Mail")
+university2 = st.text_input("University 2", "Second University Name")
+locationus2 = st.text_input("Location of University 2", "Location")
+majorus2 = st.text_input("Major at University 2", "Major")
+timeus2 = st.text_input("Time at University 2", "Time Period")
+courses2 = st.text_input("Courses at University 2", "Courses")
+gpa2 = st.text_input("GPA at University 2", "GPA")
+clubs2 = st.text_input("Clubs at University 2", "Clubs")
 
-        # Weitere Eingabefelder (vereinfacht für Demonstration)
-        # Fügen Sie hier weitere Felder nach Bedarf hinzu...
+# Professional Experience Inputs
+experience1 = st.text_input("First Experience", "Company/Organization")
+locatione1 = st.text_input("Location of First Experience", "Location")
+position1 = st.text_input("Position at First Experience", "Position")
+timee1 = st.text_input("Time Period at First Experience", "Time Period")
+task11 = st.text_input("Task 1 at First Experience", "Task")
+task12 = st.text_input("Task 2 at First Experience", "Task")
+task13 = st.text_input("Task 3 at First Experience", "Task")
 
-        # LaTeX-Code generieren und anzeigen
-        if form.form_submit_button("CV erstellen"):
-            latex_code = build_latex_code(name=name, address=address, phone=phone, email=email)
-            st.text_area("Generierter LaTeX-Code", latex_code, height=300)
+experience2 = st.text_input("Second Experience", "Second Company/Organization")
+locatione2 = st.text_input("Location of Second Experience", "Location")
+position2 = st.text_input("Position at Second Experience", "Position")
+timee2 = st.text_input("Time Period at Second Experience", "Time Period")
+task21 = st.text_input("Task 1 at Second Experience", "Task")
+task22 = st.text_input("Task 2 at Second Experience", "Task")
+task23 = st.text_input("Task 3 at Second Experience", "Task")
+
+experience3 = st.text_input("Third Experience", "Third Company/Organization")
+locatione3 = st.text_input("Location of Third Experience", "Location")
+position3 = st.text_input("Position at Third Experience", "Position")
+timee3 = st.text_input("Time Period at Third Experience", "Time Period")
+task31 = st.text_input("Task 1 at Third Experience", "Task")
+task32 = st.text_input("Task 2 at Third Experience", "Task")
+task33 = st.text_input("Task 3 at Third Experience", "Task")
+
+# Extracurricular Activities
+extracurricular1 = st.text_input("Extracurricular Activities", "Activities")
+
+# Additional Education and Certificates
+additionaleducation1 = st.text_input("Additional Education", "Courses or Training")
+certificates1 = st.text_input("Certificates and Achievements", "Certificates")
+
+# Core Qualification and Interest
+qualification1 = st.text_input(„Core Qualification in Law 1, „Mergers an acquisitions“)
+qualification2 = st.text_input("Core Qualification in Law 2“, „Corporate Law“)
+qualification3 = st.text_input("Core Qualification in Law 3“, „Securities regulation“)
+
+# Compile LaTeX Button
+if st.button("Generate LaTeX"):
+    latex_code = build_latex_code(name, address, phone, email, qualification1, qualification2, qualification3, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1)
+    st.text_area("Generated LaTeX Code:", latex_code, height=300)
+    
+    st.markdown("### How to Create a Pdf with this LaTeX Code")
+    st.markdown("""
+    - Copy the entire LaTeX code above.
+    - Visit [Overleaf](https://www.overleaf.com/project) and create a new project.te that you will need to create a free account if you don't already have one.
+    - In the project settings, set the compiler to either XeLaTeX or LuaTeX.
+    - Paste the copied code on the left side of the Overleaf editor.
+    - Compile the document to generate a PDF.
+    - Download the PDF from Overleaf once it's compiled.
+    """)
