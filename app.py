@@ -172,7 +172,7 @@ certificates1 = st.text_input("Certificates and Achievements", "Certificates")
 # Skills and Interests
 languages1 = st.text_input(" Languages", "Spanish, French")
 speeches1 = st.text_input("Programming capabilities","Python, PHP, C++, SQL, HTML, JavaScript")
-research1 = st.text_input("Startup Fields interested in", "Blockchain, Artificial Intelligence, Virtal Reality")
+research1 = st.text_input("Research Fields interested in", "Blockchain, Artificial Intelligence, Virtal Reality")
 
 
 # Compile LaTeX Button
