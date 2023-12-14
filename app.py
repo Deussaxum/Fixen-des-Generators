@@ -1,7 +1,7 @@
 import streamlit as st
 import subprocess
 
-def build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1,projectname2 elocation1, ereason1, timeen1, taske11, taske12, elocation2, timeen2, taske21, taske22, computer1, interests1, ereason2):
+def build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, experience2, locatione2, position2, timee2, task21, task22, extracurricular1, additionaleducation1, certificates1, languages1, projectname1,projectname2, elocation1, ereason1, timeen1, taske11, taske12, elocation2, timeen2, taske21, taske22, computer1, interests1, ereason2):
     latex_code = fr"""
     % Hier kommt Ihr LaTeX-Code
     \documentclass[a4paper,8pt]{{article}}
