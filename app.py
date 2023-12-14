@@ -1,169 +1,115 @@
 import streamlit as st
-from github import Github
-import os
+import requests
 
-# Set your environment variable for the GitHub Token
-os.environ['GITHUB_TOKEN'] = 'your_github_token_here'
-
-def load_template():
-    with open('template.tex', 'r') as file:
-        return file.read()
-
-def fill_template(template, data):
-    for key, value in data.items():
-        template = template.replace(f'{{{key}}}', value)
-    return template
-
-def create_tex_file(content, filename='output.tex'):
-    with open(filename, 'w') as file:
-        file.write(content)
-
-def upload_to_github(filename, content, repo_name, token):
-    try:
-        g = Github(token)
-        repo = g.get_user().get_repo(repo_name)
-        all_files = []
-        contents = repo.get_contents("")
-        while contents:
-            file_content = contents.pop(0)
-            if file_content.type == "dir":
-                contents.extend(repo.get_contents(file_content.path))
-            else:
-                file = file_content
-                all_files.append(str(file).replace('ContentFile(path="','').replace('")',''))
-
-        git_file = filename
-        if git_file in all_files:
-            contents = repo.get_contents(git_file)
-            repo.update_file(contents.path, "Updating file", content, contents.sha, branch="master")
-            st.success(f"File {filename} successfully updated!")
-        else:
-            repo.create_file(git_file, "Creating new file", content, branch="master")
-            st.success(f"File {filename} successfully created!")
-        return True
-    except Exception as e:
-        st.error(f"Error accessing the repository or uploading: {e}")
-        return False
-
-def main():
-    st.title("Lebenslauf-Generator")
-
-    # Eingabefelder für persönliche Informationen
-    name = st.text_input("Name", "Max Mustermann")
-    address = st.text_input("Adresse", "Musterstraße 1")
-    mobile = st.text_input("Handynummer", "0123456789")
-    email = st.text_input("E-Mail", "max.mustermann@example.com")
-
-    # Eingabefelder für Bildung
-    university1 = st.text_input("Universität 1", "Musteruniversität")
-    location_us1 = st.text_input("Standort Universität 1", "Musterstadt")
-    majorus1 = st.text_input("Studiengang 1", "Musterstudium")
-    timeus1 = st.text_input("Zeitraum Universität 1", "2010 - 2014")
-    courses1 = st.text_input("Kurse 1", "Musterkurs 1, Musterkurs 2")
-    gpa1 = st.text_input("GPA 1", "1.0")
-    clubs1 = st.text_input("Clubs 1", "Musterclub 1")
-
-    university2 = st.text_input("Universität 2", "Andere Musteruniversität")
-    location_us2 = st.text_input("Standort Universität 2", "Andere Musterstadt")
-    majorus2 = st.text_input("Studiengang 2", "Anderes Musterstudium")
-    timeus2 = st.text_input("Zeitraum Universität 2", "2014 - 2018")
-    courses2 = st.text_input("Kurse 2", "Anderer Musterkurs 1, Anderer Musterkurs 2")
-    gpa2 = st.text_input("GPA 2", "1.0")
-    clubs2 = st.text_input("Clubs 2", "Anderer Musterclub 1")
-
-    # Eingabefelder für Berufserfahrung
-    experience1 = st.text_input("Erfahrung 1", "Musterfirma 1")
-    location_e1 = st.text_input("Standort Erfahrung 1", "Musterstadt")
-    position1 = st.text_input("Position 1", "Musterposition 1")
-    timee1 = st.text_input("Zeitraum Erfahrung 1", "2018 - 2020")
-    task11 = st.text_input("Aufgabe 11", "Musterarbeit 1")
-    task12 = st.text_input("Aufgabe 12", "Musterarbeit 2")
-    task13 = st.text_input("Aufgabe 13", "Musterarbeit 3")
-
-    experience2 = st.text_input("Erfahrung 2", "Musterfirma 2")
-    location_e2 = st.text_input("Standort Erfahrung 2", "Andere Musterstadt")
-    position2 = st.text_input("Position 2", "Musterposition 2")
-    timee2 = st.text_input("Zeitraum Erfahrung 2", "2020 - 2022")
-    task21 = st.text_input("Aufgabe 21", "Andere Musterarbeit 1")
-    task22 = st.text_input("Aufgabe 22", "Andere Musterarbeit 2")
-    task23 = st.text_input("Aufgabe 23", "Andere Musterarbeit 3")
-
-    experience3 = st.text_input("Erfahrung 3", "Musterfirma 3")
-    location_e3 = st.text_input("Standort Erfahrung 3", "Dritte Musterstadt")
-    position3 = st.text_input("Position 3", "Musterposition 3")
-    timee3 = st.text_input("Zeitraum Erfahrung 3", "2022 - Heute")
-    task31 = st.text_input("Aufgabe 31", "Dritte Musterarbeit 1")
-    task32 = st.text_input("Aufgabe 32", "Dritte Musterarbeit 2")
-    task33 = st.text_input("Aufgabe 33", "Dritte Musterarbeit 3")
-
-    # Eingabefelder für außercurriculare Aktivitäten
-    extracurricular1 = st.text_input("Außercurriculare Aktivitäten", "Musteraktivität 1")
-    additionaleducation1 = st.text_input("Zusätzliche Bildung", "Zusatzkurs 1")
-    certificates1 = st.text_input("Zertifikate und Erfolge", "Musterzertifikat 1")
-
-    # Eingabefelder für Skills und Interessen
-    languages1 = st.text_input("Sprachen", "Deutsch, Englisch")
-    computer1 = st.text_input("Computerkenntnisse", "Musterkenntnisse")
-    interests1 = st.text_input("Interessen", "Musterinteresse 1, Musterinteresse 2")
-
-    # Erstellen des gefüllten Templates
-    template = load_template()
-    user_data = {
-        "name": name,
-        "address": address,
-        "mobile": mobile,
-        "email": email,
-        "university1": university1,
-        "location_us1": location_us1,
-        "majorus1": majorus1,
-        "timeus1": timeus1,
-        "courses1": courses1,
-        "gpa1": gpa1,
-        "clubs1": clubs1,
-        "university2": university2,
-        "location_us2": location_us2,
-        "majorus2": majorus2,
-        "timeus2": timeus2,
-        "courses2": courses2,
-        "gpa2": gpa2,
-        "clubs2": clubs2,
-        "experience1": experience1,
-        "location_e1": location_e1,
-        "position1": position1,
-        "timee1": timee1,
-        "task11": task11,
-        "task12": task12,
-        "task13": task13,
-        "experience2": experience2,
-        "location_e2": location_e2,
-        "position2": position2,
-        "timee2": timee2,
-        "task21": task21,
-        "task22": task22,
-        "task23": task23,
-        "experience3": experience3,
-        "location_e3": location_e3,
-        "position3": position3,
-        "timee3": timee3,
-        "task31": task31,
-        "task32": task32,
-        "task33": task33,
-        "extracurricular1": extracurricular1,
-        "additionaleducation1": additionaleducation1,
-        "certificates1": certificates1,
-        "languages1": languages1,
-        "computer1": computer1,
-        "interests1": interests1
+# Funktion zur Extraktion von Informationen aus der API-Antwort
+def extract_info(jsondata):
+    extracted_info = {
+        'full_name': jsondata.get('full_name', ''),
+        'city': jsondata.get('city', ''),
+        'state': jsondata.get('state', ''),
+        'country': jsondata.get('country', ''),
+        'education': jsondata.get('education', []),
+        'experiences': jsondata.get('experiences', []),
+        'volunteer_work': jsondata.get('volunteer_work', []),
+        'certifications': jsondata.get('certifications', []),
+        'languages': jsondata.get('languages', []),
+        'interests': jsondata.get('interests', [])
     }
-    filled_template = fill_template(template, user_data)
+    return extracted_info
 
-    if st.button("Lebenslauf erstellen"):
-        create_tex_file(filled_template)
+# Funktion zum Abrufen von Informationen
+def retrieve_info(linkedin_profile_url):
+    api_key = '_EIqMpWEbOnJLoQvNFz1CQ'
+    headers = {'Authorization': 'Bearer ' + api_key}
+    api_endpoint = 'https://nubela.co/proxycurl/api/v2/linkedin'
+    params = {'linkedin_profile_url': linkedin_profile_url}
+    response = requests.get(api_endpoint, params=params, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        return extract_info(data)
+    else:
+        st.error(f"Profilinformationen konnten nicht abgerufen werden: HTTP {response.status_code}")
+        return {}
 
-    token = os.environ.get('GITHUB_TOKEN')
-    repo_name = "Deussaxum/Fixen-des-Generators"
-    if st.button("Hochladen auf GitHub"):
-        upload_to_github('output.tex', filled_template, repo_name, token)
+# Funktion zum Erstellen des LaTeX-Codes
+def build_latex_code(name, address, phone, email, university1, locationus1, majorus1, timeus1, courses1, gpa1, clubs1, university2, locationus2, majorus2, timeus2, courses2, gpa2, clubs2, experience1, locatione1, position1, timee1, task11, task12, task13, experience2, locatione2, position2, timee2, task21, task22, task23, experience3, locatione3, position3, timee3, task31, task32, task33, extracurricular1, additionaleducation1, certificates1, languages1, computer1, interests1):
+    # LaTeX-Code-Vorlage hier einfügen
+    latex_code = f"""
+    % Hier kommt Ihr LaTeX-Code
+    \documentclass[a4paper,8pt]{{article}}
+    ...
+    """
+    return latex_code
 
-if __name__ == "__main__":
-    main()
+# Streamlit-App-Layout
+st.title("CV Generator 📃")
+
+# Tab-System
+tab_titles = ["Consulting 🧮", "Finance 📈", "Corporate 🏢", "Start-Up 🚀", "IT 🖥", "Academic 📚"]
+tabs = st.tabs(tab_titles)
+
+for tab in tabs:
+    with tab:
+        # Layout für jede Tab-Seite
+        linkedin_profile_url = st.text_input('LinkedIn-Profil-URL eingeben', key=f'linkedin_url_{tab.index}')
+        if st.button('LinkedIn-Daten abrufen', key=f'retrieve_data_{tab.index}'):
+            linkedin_data = retrieve_info(linkedin_profile_url) or {}
+
+        # Eingabefelder für Benutzerdaten
+        name = st.text_input("Name", value=linkedin_data.get('full_name', ''), key=f'name_{tab.index}')
+        address = st.text_input("Adresse", key=f'address_{tab.index}')
+        phone = st.text_input("Telefonnummer", key=f'phone_{tab.index}')
+        email = st.text_input("E-Mail", key=f'email_{tab.index}')
+
+        # Weitere Eingabefelder
+        university1 = st.text_input("Universität 1", key=f'university1_{tab.index}')
+        locationus1 = st.text_input("Standort der Universität 1", key=f'locationus1_{tab.index}')
+        majorus1 = st.text_input("Studiengang an der Universität 1", key=f'majorus1_{tab.index}')
+        timeus1 = st.text_input("Zeitraum an der Universität 1", key=f'timeus1_{tab.index}')
+        courses1 = st.text_input("Kurse an der Universität 1", key=f'courses1_{tab.index}')
+        gpa1 = st.text_input("GPA an der Universität 1", key=f'gpa1_{tab.index}')
+        clubs1 = st.text_input("Clubs an der Universität 1", key=f'clubs1_{tab.index}')
+
+        university2 = st.text_input("Universität 2", key=f'university2_{tab.index}')
+        locationus2 = st.text_input("Standort der Universität 2", key=f'locationus2_{tab.index}')
+        majorus2 = st.text_input("Studiengang an der Universität 2", key=f'majorus2_{tab.index}')
+        timeus2 = st.text_input("Zeitraum an der Universität 2", key=f'timeus2_{tab.index}')
+        courses2 = st.text_input("Kurse an der Universität 2", key=f'courses2_{tab.index}')
+        gpa2 = st.text_input("GPA an der Universität 2", key=f'gpa2_{tab.index}')
+        clubs2 = st.text_input("Clubs an der Universität 2", key=f'clubs2_{tab.index}')
+
+        experience1 = st.text_input("Erste Berufserfahrung", key=f'experience1_{tab.index}')
+        locatione1 = st.text_input("Standort der ersten Berufserfahrung", key=f'locatione1_{tab.index}')
+        position1 = st.text_input("Position bei der ersten Berufserfahrung", key=f'position1_{tab.index}')
+        timee1 = st.text_input("Zeitraum bei der ersten Berufserfahrung", key=f'timee1_{tab.index}')
+        task11 = st.text_input("Aufgabe 1 bei der ersten Berufserfahrung", key=f'task11_{tab.index}')
+        task12 = st.text_input("Aufgabe 2 bei der ersten Berufserfahrung", key=f'task12_{tab.index}')
+        task13 = st.text_input("Aufgabe 3 bei der ersten Berufserfahrung", key=f'task13_{tab.index}')
+
+        experience2 = st.text_input("Zweite Berufserfahrung", key=f'experience2_{tab.index}')
+        locatione2 = st.text_input("Standort der zweiten Berufserfahrung", key=f'locatione2_{tab.index}')
+        position2 = st.text_input("Position bei der zweiten Berufserfahrung", key=f'position2_{tab.index}')
+        timee2 = st.text_input("Zeitraum bei der zweiten Berufserfahrung", key=f'timee2_{tab.index}')
+        task21 = st.text_input("Aufgabe 1 bei der zweiten Berufserfahrung", key=f'task21_{tab.index}')
+        task22 = st.text_input("Aufgabe 2 bei der zweiten Berufserfahrung", key=f'task22_{tab.index}')
+        task23 = st.text_input("Aufgabe 3 bei der zweiten Berufserfahrung", key=f'task23_{tab.index}')
+
+        experience3 = st.text_input("Dritte Berufserfahrung", key=f'experience3_{tab.index}')
+        locatione3 = st.text_input("Standort der dritten Berufserfahrung", key=f'locatione3_{tab.index}')
+        position3 = st.text_input("Position bei der dritten Berufserfahrung", key=f'position3_{tab.index}')
+        timee3 = st.text_input("Zeitraum bei der dritten Berufserfahrung", key=f'timee3_{tab.index}')
+        task31 = st.text_input("Aufgabe 1 bei der dritten Berufserfahrung", key=f'task31_{tab.index}')
+        task32 = st.text_input("Aufgabe 2 bei der dritten Berufserfahrung", key=f'task32_{tab.index}')
+        task33 = st.text_input("Aufgabe 3 bei der dritten Berufserfahrung", key=f'task33_{tab.index}')
+
+        extracurricular1 = st.text_input("Außerschulische Aktivitäten", key=f'extracurricular1_{tab.index}')
+        additionaleducation1 = st.text_input("Zusätzliche Bildung", key=f'additionaleducation1_{tab.index}')
+        certificates1 = st.text_input("Zertifikate und Erfolge", key=f'certificates1_{tab.index}')
+        languages1 = st.text_input("Sprachen", key=f'languages1_{tab.index}')
+        computer1 = st.text_input("Computerkenntnisse", key=f'computer1_{tab.index}')
+        interests1 = st.text_input("Interessen", key=f'interests1_{tab.index}')
+
+        # LaTeX-Code generieren und anzeigen
+        if st.button("CV erstellen", key=f'generate_cv_{tab.index}'):
+            latex_code = build_latex_code(name, address, phone, email, university1, ...)
+            st.text_area("Generierter LaTeX-Code", latex_code, height=300)
