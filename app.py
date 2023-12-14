@@ -162,8 +162,8 @@ certificates1 = st.text_input("Certificates and Achievements", "Certificates")
 
 # Core Qualification and Interest
 qualification1 = st.text_input("Core Qualification in Law 1", "Mergers and acquisitions")
-qualification2 = st.text_input("Core Qualification in Law 2“, "Corporate Law") 
-qualification3 = st.text_input("Core Qualification in Law 3“, "Securities regulation“)
+qualification2 = st.text_input("Core Qualification in Law 2", "Corporate Law")
+qualification3 = st.text_input("Core Qualification in Law 3", "Securities Regulation")
 
 # Compile LaTeX Button
 if st.button("Generate LaTeX"):
@@ -178,3 +178,4 @@ if st.button("Generate LaTeX"):
     - Paste the copied code on the left side of the Overleaf editor.
     - Compile the document to generate a PDF.
     - Download the PDF from Overleaf once it's compiled.
+                 """)
